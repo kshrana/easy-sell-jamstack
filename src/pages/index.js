@@ -1,20 +1,21 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
-import Bio from "../components/bio"
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
+import PreviewCompatibleImage from "../components/PreviewCompatibleImage"
 
-const BlogIndex = ({ data, location }) => {
+const ShopIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
-  const posts = data.allMarkdownRemark.edges
+  const products = data.allMarkdownRemark.edges
+
+  console.log("data", data.file)
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
-      <Bio />
-      {posts.map(({ node }) => {
+      {products.map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug
         return (
           <article key={node.fields.slug}>
@@ -31,9 +32,19 @@ const BlogIndex = ({ data, location }) => {
               <small>{node.frontmatter.date}</small>
             </header>
             <section>
+              {node.frontmatter.featuredimage ? (
+                <div className="featured-thumbnail">
+                  <PreviewCompatibleImage
+                    imageInfo={{
+                      image: node.frontmatter.featuredimage,
+                      alt: `featured image thumbnail for product ${node.frontmatter.title}`,
+                    }}
+                  />
+                </div>
+              ) : null}
               <p
                 dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
+                  __html: node.frontmatter.description_short || node.excerpt,
                 }}
               />
             </section>
@@ -44,7 +55,7 @@ const BlogIndex = ({ data, location }) => {
   )
 }
 
-export default BlogIndex
+export default ShopIndex
 
 export const pageQuery = graphql`
   query {
@@ -53,7 +64,9 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___order], order: ASC }
+    ) {
       edges {
         node {
           excerpt
@@ -61,9 +74,9 @@ export const pageQuery = graphql`
             slug
           }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
             title
-            description
+            description_short
+            featuredimage
           }
         }
       }

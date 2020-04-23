@@ -2,20 +2,26 @@ backend:
   name: git-gateway
   branch: master # Branch to update (optional; defaults to master)
 
+# when using the default proxy server port
+local_backend: true
+
 # publish_mode: editorial_workflow
-media_folder: static/img # Media files will be stored in the repo under static/images/uploads
+media_folder: static/img # Media files will be stored in the repo under static/img
 public_folder: /img
 
 collections:
-  - name: "blog"
-    label: "Blog"
-    folder: "content/blog"
+  - name: "product"
+    label: "Product"
+    folder: "content/product"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{slug}}"
     editor:
      preview: false
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Description", name: "description", widget: "string" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "SKU", name: "sku", widget: "string" }
+      - { label: "Order (used for sorting)", name: "order", widget: "number" }
+      - { label: "Featured Image", name: "featuredimage", widget: "image" }
+      - { label: "Price (brutto)", name: "price-brutto", widget: "number" }
+      - { label: "Short Description", name: "description-short", widget: "string" }
+      - { label: "Description", name: "body", widget: "markdown" }

@@ -1,23 +1,23 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
-import Bio from "../components/bio"
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
+import PreviewCompatibleImage from "../components/PreviewCompatibleImage"
 
-const BlogPostTemplate = ({ data, pageContext, location }) => {
-  const post = data.markdownRemark
+const ProductTemplate = ({ data, pageContext, location }) => {
+  const product = data.markdownRemark
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO
-        title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
+        title={product.frontmatter.title}
+        description={product.frontmatter.description || product.excerpt}
       />
-      <article>
+      <div className="product">
         <header>
           <h1
             style={{
@@ -25,7 +25,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
               marginBottom: 0,
             }}
           >
-            {post.frontmatter.title}
+            {product.frontmatter.title}
           </h1>
           <p
             style={{
@@ -34,19 +34,24 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
               marginBottom: rhythm(1),
             }}
           >
-            {post.frontmatter.date}
+            post.frontmatter.date
+          </p>
+          <p>
+            <PreviewCompatibleImage
+              imageInfo={{
+                image: product.frontmatter.featuredimage,
+                alt: `featured image thumbnail for product ${product.frontmatter.title}`,
+              }}
+            />
           </p>
         </header>
-        <section dangerouslySetInnerHTML={{ __html: post.html }} />
+        <section dangerouslySetInnerHTML={{ __html: product.html }} />
         <hr
           style={{
             marginBottom: rhythm(1),
           }}
         />
-        <footer>
-          <Bio />
-        </footer>
-      </article>
+      </div>
 
       <nav>
         <ul
@@ -78,10 +83,10 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
   )
 }
 
-export default BlogPostTemplate
+export default ProductTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query ProductBySlug($slug: String!) {
     site {
       siteMetadata {
         title
@@ -89,12 +94,10 @@ export const pageQuery = graphql`
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
       id
-      excerpt(pruneLength: 160)
       html
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
-        description
+        featuredimage
       }
     }
   }

@@ -11,8 +11,6 @@ const ShopIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
   const products = data.allMarkdownRemark.edges
 
-  console.log("data", data.file)
-
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
@@ -58,7 +56,7 @@ const ShopIndex = ({ data, location }) => {
                   }
                 </p>
                 <form action="" method="post">
-                  <label for="quantity">Quantity</label>
+                  <label htmlFor="quantity">Quantity</label>
                   <input
                     type="number"
                     id="quantity"
@@ -66,7 +64,7 @@ const ShopIndex = ({ data, location }) => {
                     value="1"
                     min="1"
                   />
-                  <input type="hidden" name="sku" value="" />
+                  <input readOnly type="hidden" name="sku" value="" />
                   <button type="submit">Buy Now</button>
                 </form>
               </section>

@@ -99,7 +99,14 @@ export const pageQuery = graphql`
           frontmatter {
             title
             description_short
-            featuredimage
+            featuredimage {
+              childImageSharp {
+                fluid(maxWidth: 600, quality: 100) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+              publicURL
+            }
             price_brutto
           }
         }

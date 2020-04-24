@@ -2,6 +2,8 @@
 Simple shop with all the comfort but without the burden of any webserver. Powered by the Jamstack-architecture.
 
 # Roadmap
+- [ ] Allow customers to sign-in
+- [ ] Add shopping-cart
 - [ ] Accept payments per Stripe
   * See [Netlify Guide on Stripe integration using Jamstack-architecture](https://www.netlify.com/blog/2020/04/13/learn-how-to-accept-money-on-jamstack-sites-in-38-minutes/) and [Stripe Payments docs](https://stripe.com/docs/payments/accept-a-payment#web)
 ---

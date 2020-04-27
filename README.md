@@ -8,6 +8,12 @@ Simple shop with all the comfort but without the burden of any webserver. Powere
   * See [Netlify Guide on Stripe integration using Jamstack-architecture](https://www.netlify.com/blog/2020/04/13/learn-how-to-accept-money-on-jamstack-sites-in-38-minutes/) and [Stripe Payments docs](https://stripe.com/docs/payments/accept-a-payment#web)
 ---
 
+# Deployment
+This repo is automatically deployed by Netlify.  
+  
+Preview-URL: http://easy-sell-jamstack.netlify.app/  
+Admin: http://easy-sell-jamstack.netlify.app/admin/
+
 # Architecture
 * Static Site: powered by *Gatsby*
 * CMS editing functionality: *Netlify CMS* (Open Source :thumbsup:)

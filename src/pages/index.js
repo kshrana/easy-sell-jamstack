@@ -47,7 +47,7 @@ const ShopIndex = ({ data, location }) => {
                     __html: node.frontmatter.description_short || node.excerpt,
                   }}
                 />
-                <p className="pice">
+                <p className="price">
                   {
                     new Intl.NumberFormat('it-IT', {
                       style: 'currency',
